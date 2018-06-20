@@ -1,23 +1,73 @@
 class DCanvas
 { 
-  PGraphics buffer;
-  color c = color(255,255,255);
+ // PGraphics buffer;
+  
+  ArrayList<Float> coords = new ArrayList<Float>();
   
   public DCanvas()
   {
    buffer = createGraphics(700,350);
+
+
   }
-  
+   
    void draw()
    {
 
-  buffer.beginDraw();
-  buffer.background(c);
- // buffer.ellipse(50,50,30,30);
-  buffer.ellipse(mouseX-309,mouseY-220,50,50);
-  buffer.endDraw();
+   buffer.beginDraw();
+   drawLines();
+   drawRectangles();
+   buffer.endDraw();
+  
   
   image(buffer,310,220);
    }
+   
+  
+  
+  
+ void drawLines()
+{
+  buffer.beginDraw();
+  buffer.background(c);
+  buffer.stroke(180);
+  buffer.strokeWeight(1);
+  
+  for (int i = 0; i <= 6; i++)
+  {
+    buffer.line(0, 50 * i, width, 50 * i);
+  }
+  buffer.endDraw();
+}
+  
+ 
+  void drawRectangles()
+{
+   buffer.beginDraw();
+  for (int i = 0; i < data.ShapePoints.size(); i ++ )
+  {
+    data.ShapePoints.get(i).drawShape();
+  }
+  buffer.endDraw();
+}
+
+
+
+
+void Press()
+ {
+  float x =  (mouseX -310);
+  float y =  (mouseY -230);
+  coords.add(x);
+  coords.add(y);
+  data.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor));
+ }
+  
+  
+  
+  
+  
+  
+  
   
 }

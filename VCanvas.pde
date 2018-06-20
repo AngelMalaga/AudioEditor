@@ -13,16 +13,16 @@ class VCanvas
 
   buffer.beginDraw();
   buffer.background(c);
- // buffer.ellipse(50,50,30,30);
+
   buffer.ellipse(mouseX-12,mouseY-50,50,50);
   buffer.endDraw();
-  DrawVisual();
+
   
   image(buffer,12,50);
   
    }
-   
-   
+   // Crear linia de tiempo 20/06/18
+   /*
    void DrawVisual()
    {
      for(int i = 0; i < player.bufferSize() - 1; i++)
@@ -37,5 +37,6 @@ class VCanvas
         
 
    }
+   */
   
 }
