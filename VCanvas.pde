@@ -15,11 +15,20 @@ class VCanvas
   buffer.background(c);
 
   buffer.ellipse(mouseX-12,mouseY-50,50,50);
-  buffer.endDraw();
-
-  
-  image(buffer,12,50);
-  
+ 
+   lineOne = map(Time, 0, player.length(), 0, buffer.width);
+   lineTwo = map(Time+Range, 0, player.length(), 0, buffer.width);
+   
+  // float coso = 0;
+//   float map = map(mouseX, 0, rango, 0, 18);
+   
+   buffer.stroke(0,200,0);
+   buffer.line(lineOne, 0,lineOne, height);
+   buffer.stroke(255,5,5);
+   buffer.line(lineTwo, 0, lineTwo, height);
+   buffer.endDraw();
+   image(buffer,12,50);
+   Time();
    }
    // Crear linia de tiempo 20/06/18
    /*
@@ -38,5 +47,11 @@ class VCanvas
 
    }
    */
-  
+    void Time()
+    {
+ 
+    rango = (Math.round(Range))/1000; 
+   // print("Rango" + Time+", "+rango);
+    }
+
 }

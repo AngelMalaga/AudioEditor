@@ -32,11 +32,20 @@ JSONObject json;
          int LPosition = dato.getInt("Position");
           int LSize = dato.getInt("Size");
            int LTime = dato.getInt("Time");
+            int Lx = dato.getInt("x");
            
+         
+           /*
            Shape = LShape;
            lx = LTime;
            ly = LPosition;
            Size = LSize;
+           */
+           Shape = LShape;
+           lx = Lx;
+           ly = LPosition;
+           Size = LSize;
+           x1 = LTime;
            
       JSONArray Color = dato.getJSONArray("Color"); 
      for(int e = 0;e < Color.size();e++)
@@ -49,7 +58,7 @@ JSONObject json;
           dcolor.set(R,G,B);
        
      }
-        data.ShapePoints.add(new ShapeCreator(lx,ly,Shape,Size,dcolor));
+        data.ShapePoints.add(new ShapeCreator(lx,ly,Shape,Size,dcolor,x1));
 
      }
      

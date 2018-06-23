@@ -17,13 +17,16 @@ JSONObject json;
   }
 
 void savedata(String Nombre,int time)
-{
+{print("data 4 :::::",ShapePoints.size());
+
+  if(ShapePoints.size()>0)
+  {
     for(int i = 0; i < ShapePoints.size(); i++)
   {
      temp();
     float[] data = new float[7];
     data = ShapePoints.get(i).getData();
-   print("data 4 :::::",data[4]);
+  // print("data 4 :::::",ShapePoints.size());
    
    
     json.setString("SongName",Nombre);
@@ -40,13 +43,15 @@ void savedata(String Nombre,int time)
     
     
      shape.setFloat("Shape",data[2]);
-     shape.setFloat("Time",data[0]);
+     shape.setFloat("x",data[0]);
      shape.setFloat("Position",data[1]);
      shape.setFloat("Size",data[3]);
-   
+     shape.setFloat("Time",data[7]);
+     
      rcolor.setFloat("R",data[4]);
      rcolor.setFloat("G",data[5]);
      rcolor.setFloat("B",data[6]);
+     
      
      lcolor.setJSONObject(0, rcolor);
      shape.setJSONArray("Color", lcolor);
@@ -60,10 +65,12 @@ void savedata(String Nombre,int time)
    
     
     
-    
+    }
      
   }
+  
 }
+
   
   void temp()
   {

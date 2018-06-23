@@ -10,12 +10,13 @@ Data  data;
 
 
 String name  = "Viva la vida";
-int x,y,Shape = 1;
+int x,y,x1,y1,Shape = 1,coso;
 color SColor; 
 color c = color(255,255,255);
-float r,R,G,B,lx,ly,Size;
+float r,R,G,B,lx,ly,Size,lineOne,lineTwo,Time,Range;
 PVector dcolor = new PVector(0,0,0);
 PGraphics buffer;
+int rango;
 enum Day {
   circle,
   square
@@ -42,31 +43,41 @@ void setup()
   .setLabel("Exportar archivo");
   
   ui.addButton("ChargeShapeCu")
-  .setPosition(40,290)
+  .setPosition(40,330)
   .setSize(100,35)
   .setLabel("Cuadrado");
   
     ui.addButton("ChargeShapeCi")
-  .setPosition(150,290)
+  .setPosition(150,330)
   .setSize(100,35)
   .setLabel("Circulo");
   
     ui.addButton("DeleteShape")
-  .setPosition(40,500)
+  .setPosition(40,550)
   .setSize(100,35)
   .setLabel("Eliminar Figura");
   
-   ui.addSlider("R", 0, 255, 0, 40, 336, 210, 25);
-   ui.addSlider("G", 0, 255, 0, 40, 366, 210, 25);
-   ui.addSlider("B", 0, 255, 0, 40, 396, 210, 25);
+   ui.addSlider("R", 0, 255, 0, 40, 436, 210, 25);//  Colores RGB
+   ui.addSlider("G", 0, 255, 0, 40, 466, 210, 25);//  Colores RGB
+   ui.addSlider("B", 0, 255, 0, 40, 496, 210, 25);//  Colores RGB
+   ui.addSlider("Time", 0, player.length()-Range, 1, 40, 220, 210, 25);
    
-   ui.addSlider("Size", 1, 60, 1, 40, 250, 210, 25);
+  // ui.addRange("coso", 0f, 60000f, 0, 60000, 40, 400, 210, 25);
    
+   
+   ui.addSlider("Size", 10, 35, 20, 40, 295, 210, 25);
+   ui.addSlider("Range", 1, 14000, 1, 40, 260, 210, 25);
+   
+   ui.getController("Size").setValue(Size);
+   ui.getController("Time").setValue(Time);
+   ui.getController("Range").setValue(Range);
+ 
+ 
    ui.getController("R").setValue(R);
    ui.getController("G").setValue(G);
    ui.getController("B").setValue(B);
+ //  Size = 25;
    
-   ui.getController("Size").setValue(Size);
   
   Dcanvas = new DCanvas();
   Vcanvas = new VCanvas();
@@ -78,7 +89,13 @@ void setup()
   //print("data:",size);
   //
 }
-
+void updateUi()
+{
+  
+   ui.getController("Time").setMax(player.length()-Range);
+   //ui.getController("Range").setMax((Math.round(14000))/1000);
+   
+}
 
 void ChargeFile()
 {
@@ -111,23 +128,35 @@ void ChargeShapeCi()
 
 void DeleteShape()
 {
-   
+
   
 }
 
 
 void draw()
 {
+   
   background(#BF4545);
   Dcanvas.draw();
   Vcanvas.draw();
   visualDraw();
+  TimeLine();
+  updateUi();
 }
 
 void visualDraw()
 {
- 
+  
+
+  
 }
+
+void TimeLine()
+{
+  
+  
+}
+
 
 void keyPressed()
 {
@@ -146,5 +175,6 @@ void mouseClicked()
 {
    Dcanvas.Press();
    dcolor.set(R,G,B);
-   print("data:",Size);
+  // print("TimeLine:",Time);
+    updateUi();
 }
