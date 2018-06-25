@@ -1,7 +1,7 @@
 class DCanvas
 { 
  // PGraphics buffer;
-  
+  PGraphics buffer;
  // ArrayList<Float> coords = new ArrayList<Float>();
   float lastPos = 0;
   public DCanvas()
@@ -69,17 +69,13 @@ void Press()
  {
   float x = (50 *  (mouseX  / 50 )) -300 ;
   float y = (50 *  (mouseY  / 50 )) -210;
- // coords.add(x);
- // coords.add(y);
-  //float coso = 0;
- //print("map, "+x);
-  
   if(x >=0){
   float map = map(x, 0, buffer.width, 0, 14);
-  int time = (Math.round(map)); // añadir time al Json
-  //print("map, "+time);
+  int time = (Math.round(map)); // añadir time al Json de Dcanvas a ShapeCreator
   float TR = Time + time*1000;
-  print("map, "+TR);
+  stime = time;
+  
+ // print("map, "+time);
    
   buffers.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
   

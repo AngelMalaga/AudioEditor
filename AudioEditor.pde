@@ -16,8 +16,9 @@ color SColor;
 color c = color(255,255,255);
 float r,R,G,B,lx,ly,Size,lineOne,lineTwo,Time,Range;
 PVector dcolor = new PVector(0,0,0);
-PGraphics buffer;
-int rango,vrango;
+//PGraphics buffer;
+
+int rango,vrango,stime;
 String Path;
 enum Day {
   circle,

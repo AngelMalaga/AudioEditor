@@ -10,15 +10,16 @@ class VCanvas
   
    void draw()
    {
-
+     
+     
+ 
   buffer.beginDraw();
   buffer.background(c);
-
-  buffer.ellipse(mouseX-12,mouseY-50,50,50);
+ // buffer.ellipse(mouseX-12,mouseY-50,50,50);
  
    lineOne = map(Time, 0, player.length(), 0, buffer.width);
    lineTwo = map(Time+Range, 0, player.length(), 0, buffer.width);
-   
+
    
   // float coso = 0;
 //   float map = map(mouseX, 0, rango, 0, 18);
@@ -36,8 +37,8 @@ class VCanvas
   {
     
     
- //  float t = map(1000, 0, player.length(), 0, buffer.width);
-  //print("t:, "+t);
+     //float t = map(1000, 0, player.length(), 0, buffer.width); 
+     //print("t:, "+t);
    buffer.line(t * i, 0, t * i, height); // columnas
     
   }
@@ -55,9 +56,11 @@ class VCanvas
    buffer.line(lineOne, 0,lineOne, height);
    buffer.stroke(255,5,5);
    buffer.line(lineTwo, 0, lineTwo, height);
+   drawShapes();
    buffer.endDraw();
    image(buffer,12,50);
    Time();
+  // drawShapes();
    
  
   
@@ -86,9 +89,24 @@ class VCanvas
  
     rango = (Math.round(Range))/1000; 
     vrango = (Math.round(player.length()))/1000; 
+  //  vtime = (Math.round(Time))/1000; //////////////////////////////////////////////////////////////////////
    // print("vrango:, "+ vrango);
 
     }
+    
+
+      void drawShapes()
+    {
+      buffer.beginDraw();
+      for (int i = 0; i < buffers.ShapePoints.size(); i ++ )
+     {
+      buffers.ShapePoints.get(i).vdrawShape();
+      }
+      buffer.endDraw();
+    }
+    
+
+    
     
     float lastPos = 0;
     
