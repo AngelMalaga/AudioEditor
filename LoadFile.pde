@@ -3,8 +3,10 @@ class LoadFile
 JSONObject json;
     LoadFile() 
     {
-     json = loadJSONObject("data/export/Test.json");
-   }
+   
+      json = loadJSONObject(Path);
+  
+    }
   
   void load()
   {
@@ -58,7 +60,7 @@ JSONObject json;
           dcolor.set(R,G,B);
        
      }
-        data.ShapePoints.add(new ShapeCreator(lx,ly,Shape,Size,dcolor,x1));
+        buffers.ShapePoints.add(new ShapeCreator(lx,ly,Shape,Size,dcolor,x1));
 
      }
      
@@ -67,5 +69,8 @@ JSONObject json;
      
 
   }
+  
+
+  
  
 }

@@ -7,6 +7,7 @@ DCanvas Dcanvas;
 VCanvas Vcanvas;
 LoadFile file;
 Data  data;
+Buffer buffers;
 
 
 String name  = "Viva la vida";
@@ -16,7 +17,8 @@ color c = color(255,255,255);
 float r,R,G,B,lx,ly,Size,lineOne,lineTwo,Time,Range;
 PVector dcolor = new PVector(0,0,0);
 PGraphics buffer;
-int rango;
+int rango,vrango;
+String Path;
 enum Day {
   circle,
   square
@@ -29,7 +31,7 @@ void setup()
   player = minim.loadFile("data/audio/Eury.mp3",512);
   
   data = new Data();
-  
+  buffers = new Buffer();
   
   ui = new ControlP5(this);
   ui.addButton("ChargeFile")
@@ -89,10 +91,14 @@ void setup()
   //print("data:",size);
   //
 }
+
+
 void updateUi()
 {
   
    ui.getController("Time").setMax(player.length()-Range);
+   
+  
    //ui.getController("Range").setMax((Math.round(14000))/1000);
    
 }
@@ -101,19 +107,15 @@ void ChargeFile()
 {
   
 
-  
 
-  file = new LoadFile();
-  file.load();
  
+ selectInput("Ruta de lectura", "fileSelected");
 
 }
 
 void ExportFile()
 {
-
-  data.savedata(name,60);
-  
+ selectOutput("Ruta de guardado", "fileSave");
 }
 
 void ChargeShapeCu()
@@ -125,10 +127,17 @@ void ChargeShapeCi()
 {
  Shape = 2;
 }
-
+float lastTime = 0;
 void DeleteShape()
 {
-
+     
+    
+   if(lastTime != Time)
+   {
+     lastTime = Time;
+     Dcanvas.update();
+   }
+   
   
 }
 
@@ -158,6 +167,9 @@ void TimeLine()
 }
 
 
+
+
+
 void keyPressed()
 {
 
@@ -177,4 +189,32 @@ void mouseClicked()
    dcolor.set(R,G,B);
   // print("TimeLine:",Time);
     updateUi();
+}
+
+void fileSelected(File selection) {
+  if (selection == null) {
+    println("ruta de lectura no escogida");
+  } 
+  else 
+  {
+   
+    Path = selection.getAbsolutePath();
+    file = new LoadFile();
+    file.load();
+    
+  }
+}
+
+void fileSave(File selection) {
+  if (selection == null) {
+    println("ruta de guardado no escogida");
+  } 
+  else 
+  {
+   
+    Path = selection.getAbsolutePath();
+   data.savedata(name,60);
+   ;
+    
+  }
 }

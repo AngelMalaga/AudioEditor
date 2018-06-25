@@ -3,7 +3,7 @@ class DCanvas
  // PGraphics buffer;
   
  // ArrayList<Float> coords = new ArrayList<Float>();
-  
+  float lastPos = 0;
   public DCanvas()
   {
    buffer = createGraphics(711,350);
@@ -16,7 +16,8 @@ class DCanvas
 
    buffer.beginDraw();
    drawLines();
-   drawRectangles();
+   //drawShapes();
+   update();
    buffer.endDraw();
   
   
@@ -43,16 +44,20 @@ class DCanvas
     
     buffer.line(0, 50 * i-210 , width, 50 * i-210 );  // columnas
   }
+  
+  //lineOne = map(lastPos, 0, player.length(), 0, buffer.width);
+ // buffer.line(lineOne, 0,lineOne, height);
+  
   buffer.endDraw();
 }
   
  
-  void drawRectangles()
+  void drawShapes()
 {
    buffer.beginDraw();
-  for (int i = 0; i < data.ShapePoints.size(); i ++ )
+  for (int i = 0; i < buffers.ShapePoints.size(); i ++ )
   {
-    data.ShapePoints.get(i).drawShape();
+    buffers.ShapePoints.get(i).drawShape();
   }
   buffer.endDraw();
 }
@@ -76,11 +81,35 @@ void Press()
   float TR = Time + time*1000;
   print("map, "+TR);
    
-  data.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
+  buffers.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
   
   }
  }
   
+  
+  
+  
+    
+    
+    void update()
+    {
+       if(buffers.ShapePoints.size()>0)
+            {
+             for(int i = 0; i < buffers.ShapePoints.size(); i++)
+              {
+               
+                float nextPos = Time + Range;
+                float[] data = new float[7];
+                data = buffers.ShapePoints.get(i).getData();
+                 lastPos = data[7];
+                 if(lastPos >= Time && lastPos <= nextPos)
+                 {
+                  buffers.ShapePoints.get(i).drawShape();
+                 }
+              }
+             
+            }
+    }
   
   
   

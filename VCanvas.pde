@@ -19,8 +19,37 @@ class VCanvas
    lineOne = map(Time, 0, player.length(), 0, buffer.width);
    lineTwo = map(Time+Range, 0, player.length(), 0, buffer.width);
    
+   
   // float coso = 0;
 //   float map = map(mouseX, 0, rango, 0, 18);
+  buffer.stroke(255,153,0);
+  
+   float t = 0;
+  if(vrango != 0)
+  {
+     t = 1000 / 195.0;// preguntar al profe   :,v
+    
+    // print("t:, "+t);
+  }
+  
+  for (int i = 0; i <= vrango; i++)
+  {
+    
+    
+ //  float t = map(1000, 0, player.length(), 0, buffer.width);
+  //print("t:, "+t);
+   buffer.line(t * i, 0, t * i, height); // columnas
+    
+  }
+   for (int i = 0; i <= 7; i++)
+  {
+    
+    buffer.line(0, 22 * i , width, 22 * i  );  // filas
+  }
+  
+
+
+
    
    buffer.stroke(0,200,0);
    buffer.line(lineOne, 0,lineOne, height);
@@ -29,6 +58,11 @@ class VCanvas
    buffer.endDraw();
    image(buffer,12,50);
    Time();
+   
+ 
+  
+   
+   
    }
    // Crear linia de tiempo 20/06/18
    /*
@@ -51,7 +85,31 @@ class VCanvas
     {
  
     rango = (Math.round(Range))/1000; 
-   // print("Rango" + Time+", "+rango);
-    }
+    vrango = (Math.round(player.length()))/1000; 
+   // print("vrango:, "+ vrango);
 
+    }
+    
+    float lastPos = 0;
+    
+    /*
+    void update()
+    {
+       if(buffers.ShapePoints.size()>0)
+            {
+             for(int i = 0; i < buffers.ShapePoints.size(); i++)
+              {
+               
+                float[] data = new float[7];
+                data = buffers.ShapePoints.get(i).getData();
+                 lastPos = data[7];
+                 if(lastPos>Time && lastPos <Range)
+                 {
+                  new ShapeCreator(lx,ly,Shape,Size,dcolor,x1);
+                 }
+              }
+             
+            }
+    }
+   */
 }

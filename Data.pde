@@ -1,7 +1,7 @@
 class Data
 {
   
- ArrayList<ShapeCreator>ShapePoints = new ArrayList<ShapeCreator>();
+// public  ArrayList<ShapeCreator>ShapePoints = new ArrayList<ShapeCreator>();
 
 JSONArray bcolor,lcolor,points ;
 JSONObject gcolor,rcolor,shape ;
@@ -17,15 +17,15 @@ JSONObject json;
   }
 
 void savedata(String Nombre,int time)
-{print("data 4 :::::",ShapePoints.size());
+{print("data 4 :::::",buffers.ShapePoints.size());
 
-  if(ShapePoints.size()>0)
+  if(buffers.ShapePoints.size()>0)
   {
-    for(int i = 0; i < ShapePoints.size(); i++)
+    for(int i = 0; i < buffers.ShapePoints.size(); i++)
   {
      temp();
     float[] data = new float[7];
-    data = ShapePoints.get(i).getData();
+    data = buffers.ShapePoints.get(i).getData();
   // print("data 4 :::::",ShapePoints.size());
    
    
@@ -61,7 +61,7 @@ void savedata(String Nombre,int time)
     
  
 
-     saveJSONObject(json, "data/export/Test.json");
+     saveJSONObject(json, Path);
    
     
     

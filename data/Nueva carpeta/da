@@ -1,0 +1,107 @@
+{
+  "Background": [{
+    "R": 255,
+    "B": 255,
+    "G": 255
+  }],
+  "SongName": "Viva la vida",
+  "Level": [
+    {
+      "Shape": 2,
+      "Position": 90,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 0,
+      "Time": 0
+    },
+    {
+      "Shape": 2,
+      "Position": 90,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 100,
+      "Time": 2000
+    },
+    {
+      "Shape": 2,
+      "Position": 90,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 650,
+      "Time": 13000
+    },
+    {
+      "Shape": 2,
+      "Position": 90,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 550,
+      "Time": 11000
+    },
+    {
+      "Shape": 2,
+      "Position": 190,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 0,
+      "Time": 19044.45703125
+    },
+    {
+      "Shape": 2,
+      "Position": 190,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 100,
+      "Time": 21044.45703125
+    },
+    {
+      "Shape": 2,
+      "Position": 190,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 550,
+      "Time": 30044.45703125
+    },
+    {
+      "Shape": 2,
+      "Position": 190,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 650,
+      "Time": 32044.45703125
+    }
+  ],
+  "Lenght": 60
+}
