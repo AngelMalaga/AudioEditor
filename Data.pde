@@ -1,22 +1,27 @@
 class Data
 {
   
-// public  ArrayList<ShapeCreator>ShapePoints = new ArrayList<ShapeCreator>();
+
 
 JSONArray bcolor,lcolor,points ;
 JSONObject gcolor,rcolor,shape ;
 JSONObject json;
-
+String Nombre;
 
  Data()
   {
-  
+
   points = new JSONArray();
 
   
   }
+  
+  void fileSong(String nombre)
+  {
+    this.Nombre = nombre;
+  }
 
-void savedata(String Nombre,int time)
+void savedata(int time)
 {print("data 4 :::::",buffers.ShapePoints.size());
 
   if(buffers.ShapePoints.size()>0)

@@ -1,8 +1,7 @@
 class DCanvas
 { 
- // PGraphics buffer;
+ // Este es el canvas  de la ventana inferior de edicion
   PGraphics buffer;
- // ArrayList<Float> coords = new ArrayList<Float>();
   float lastPos = 0;
   public DCanvas()
   {
@@ -45,8 +44,7 @@ class DCanvas
     buffer.line(0, 50 * i-210 , width, 50 * i-210 );  // columnas
   }
   
-  //lineOne = map(lastPos, 0, player.length(), 0, buffer.width);
- // buffer.line(lineOne, 0,lineOne, height);
+  
   
   buffer.endDraw();
 }
@@ -75,7 +73,7 @@ void Press()
   float TR = Time + time*1000;
   stime = time;
   
- // print("map, "+time);
+ 
    
   buffers.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
   

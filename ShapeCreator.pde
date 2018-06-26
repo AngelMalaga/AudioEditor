@@ -44,6 +44,7 @@ class ShapeCreator
     
     Dcanvas.buffer.beginDraw();
      Dcanvas.buffer.fill(R,G,B);
+     Dcanvas.buffer.rectMode(CENTER);
      Dcanvas.buffer.rect(px+25,py+25,size*2,size*2); 
      Dcanvas.buffer.endDraw();
 
@@ -60,18 +61,42 @@ class ShapeCreator
 
   
  }
-/// Editar/////////////////////////////////////////////////////  NO se esta bien, hay que mejorar esta parte
+/// Editar/////////////////////////////////////////////////////  NO  esta bien, hay que mejorar esta parte
+/*
+-Falta implementar  el boton de eliminar
+-Falta corregir el cuadro de edicion 
+
+intenta hacer lo del boton elimnar
+yo me pondre a hacer lo de VCanvas.
+
+
+*/
+
  void vdrawShape()
  {
+     
+    if(type == 1)
+    {
+      float   x = map(rt, 0, player.length(), 0, Vcanvas.buffer.width);  //
+      float   y = map(py, 0, Vcanvas.buffer.height, 0, 7); // 
+      y = y+2;
+      Vcanvas.buffer.beginDraw();
+      Vcanvas.buffer.fill(R,G,B);
+      Vcanvas.buffer.rectMode(CENTER);
+      Vcanvas.buffer.rect(x,y*9,10,10); 
+      Vcanvas.buffer.endDraw();
 
-      float   x = map(rt, 0, player.length(), 0, Vcanvas.buffer.width);  // ni idea de como funciono  D:
-      float   y = map(py, 0, Vcanvas.buffer.height, 0, 7); // buscar el funcionamiento  de map
+      }
+   else
+   {
+      float   x = map(rt, 0, player.length(), 0, Vcanvas.buffer.width);  //
+      float   y = map(py, 0, Vcanvas.buffer.height, 0, 7); // 
       y = y+2;
       Vcanvas.buffer.beginDraw();
       Vcanvas.buffer.fill(R,G,B);
       Vcanvas.buffer.ellipse(x,y*9,10,10); 
-      Vcanvas.buffer.endDraw();
-      // print("map, "+y);
+      Vcanvas.buffer.endDraw(); 
+     }
  }
   
 }

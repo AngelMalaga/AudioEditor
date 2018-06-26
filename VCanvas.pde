@@ -1,5 +1,6 @@
 class VCanvas
 { 
+  // Este es el canvas  de la ventana superior de edicion
   PGraphics buffer;
   color c = color(255,255,255);
   
@@ -15,30 +16,35 @@ class VCanvas
  
   buffer.beginDraw();
   buffer.background(c);
- // buffer.ellipse(mouseX-12,mouseY-50,50,50);
  
+ 
+  int p = player.position();
+  int l = player.length();
+  float x = map(p, 0, l, 0, buffer.width);
+  buffer.stroke(#0A0A0A);
+  buffer.line(x, 0, x, buffer.height);
+  
+  
    lineOne = map(Time, 0, player.length(), 0, buffer.width);
    lineTwo = map(Time+Range, 0, player.length(), 0, buffer.width);
 
    
-  // float coso = 0;
-//   float map = map(mouseX, 0, rango, 0, 18);
-  buffer.stroke(255,153,0);
+
+  
+  buffer.stroke(165,165,165,50);
   
    float t = 0;
   if(vrango != 0)
   {
-     t = 1000 / 195.0;// preguntar al profe   :,v
+    //t = 1000 / 195.0;// sigo medio confundido con esto xD
+      t = 1000.0 / vrango;
     
     // print("t:, "+t);
   }
   
   for (int i = 0; i <= vrango; i++)
   {
-    
-    
-     //float t = map(1000, 0, player.length(), 0, buffer.width); 
-     //print("t:, "+t);
+  
    buffer.line(t * i, 0, t * i, height); // columnas
     
   }
@@ -60,14 +66,10 @@ class VCanvas
    buffer.endDraw();
    image(buffer,12,50);
    Time();
-  // drawShapes();
-   
- 
   
-   
-   
+
    }
-   // Crear linia de tiempo 20/06/18
+   // Crear linia de tiempo 20/06/18 consume mucho no lo pongas
    /*
    void DrawVisual()
    {
@@ -86,12 +88,9 @@ class VCanvas
    */
     void Time()
     {
- 
     rango = (Math.round(Range))/1000; 
     vrango = (Math.round(player.length()))/1000; 
-  //  vtime = (Math.round(Time))/1000; //////////////////////////////////////////////////////////////////////
-   // print("vrango:, "+ vrango);
-
+ 
     }
     
 
@@ -105,29 +104,8 @@ class VCanvas
       buffer.endDraw();
     }
     
-
-    
-    
+ 
     float lastPos = 0;
     
-    /*
-    void update()
-    {
-       if(buffers.ShapePoints.size()>0)
-            {
-             for(int i = 0; i < buffers.ShapePoints.size(); i++)
-              {
-               
-                float[] data = new float[7];
-                data = buffers.ShapePoints.get(i).getData();
-                 lastPos = data[7];
-                 if(lastPos>Time && lastPos <Range)
-                 {
-                  new ShapeCreator(lx,ly,Shape,Size,dcolor,x1);
-                 }
-              }
-             
-            }
-    }
-   */
+ 
 }

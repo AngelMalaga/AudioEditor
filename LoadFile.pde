@@ -10,8 +10,8 @@ JSONObject json;
   
   void load()
   {
-     String SongName = json.getString("SongName");
-     int Lenght = json.getInt("Lenght");
+     String SongName = json.getString("SongName"); // Esto es solo para q lo lea Unity
+     int Lenght = json.getInt("Lenght"); /// Falta  
      
      JSONArray Background = json.getJSONArray("Background");
      JSONArray Level = json.getJSONArray("Level");
@@ -37,12 +37,7 @@ JSONObject json;
             int Lx = dato.getInt("x");
            
          
-           /*
-           Shape = LShape;
-           lx = LTime;
-           ly = LPosition;
-           Size = LSize;
-           */
+         
            Shape = LShape;
            lx = Lx;
            ly = LPosition;
