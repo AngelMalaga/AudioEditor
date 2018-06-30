@@ -10,12 +10,15 @@ JSONObject json;
   
   void load()
   {
-     String SongName = json.getString("SongName"); // Esto es solo para q lo lea Unity
+     String SongName = json.getString("SongName"); // Esto contiene la ruta del archivo y el nombre
      int Lenght = json.getInt("Lenght"); /// Falta  
      
      JSONArray Background = json.getJSONArray("Background");
      JSONArray Level = json.getJSONArray("Level");
-   
+     Path = SongName;
+     player = minim.loadFile(Path,512);// redundante
+     data.fileSong(SongName);
+    
 
      for(int i = 0;i < Background.size();i++)
      {

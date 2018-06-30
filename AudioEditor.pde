@@ -10,7 +10,7 @@ Data  data;
 Buffer buffers;
 ControlGroup messageBox; ////////
 ControlGroup messageBox2;///////
-
+AudioMetaData meta;
 
 //String name  = "Viva la vida";
 int x,y,x1,y1,Shape = 1,coso;
@@ -43,6 +43,8 @@ void setup()
   
   data = new Data();
   buffers = new Buffer();
+
+  
   
   ui = new ControlP5(this);
   ui.addButton("ChargeFile")
@@ -145,14 +147,9 @@ void charge()
 {
   if(player != null){ 
  
-     int m = millis();
-     if(m > 2000)
-       {
+    
      state = state.draw;
-       } 
-       
-     }else
-     {drawUi();}
+  }
 }
 
 
@@ -331,10 +328,18 @@ void fileSelected(File selection) {
   } 
   else 
   {
+    if(player != null)
+    {
+      state = state.none;
+      player.close();
+      
+    }
+   
    
     Path = selection.getAbsolutePath();
     file = new LoadFile();
     file.load();
+    drawUi();
     
   }
 }
@@ -343,12 +348,13 @@ void fileSave(File selection) {
   if (selection == null) {
     println("ruta de guardado no escogida");
   } 
-  else 
+  else if(player != null)
   {
-   
+     meta = player.getMetaData();
+     data.fileSong(meta.fileName());
     Path = selection.getAbsolutePath();
     data.savedata(60);
-   ;
+   
     
   }
 }
@@ -362,7 +368,7 @@ void fileSong(File selection) {
     
     Path = selection.getAbsolutePath();
     player = minim.loadFile(Path,512); 
-   // player(Path);
+   
     data.fileSong(Path);
     
     drawUi();

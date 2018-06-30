@@ -24,7 +24,7 @@ String Nombre;
 void savedata(int time)
 {print("data 4 :::::",buffers.ShapePoints.size());
 
-  if(buffers.ShapePoints.size()>0)
+  if(buffers.ShapePoints.size()> 0 && player != null)
   {
     for(int i = 0; i < buffers.ShapePoints.size(); i++)
   {
