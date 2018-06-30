@@ -14,9 +14,23 @@ class DCanvas
    {
 
    buffer.beginDraw();
-   drawLines();
+   //buffer.background(c);
+ 
+    drawLines();
+    if(state == state.draw)
+    {
+      update();
+    }
+ 
+ 
+    if(state == state.loop)
+  {
+    Dcanvas.test();
+  }
+   
+   
    //drawShapes();
-   update();
+   
    buffer.endDraw();
   
   
@@ -45,12 +59,15 @@ class DCanvas
   }
   
   
-  
+
   buffer.endDraw();
 }
   
- 
-  void drawShapes()
+  
+  //No necesario, update() hace lo mismo que esta funcion.
+  //Update(Reutilizado en test() )
+ /*
+ void drawShapes()
 {
    buffer.beginDraw();
   for (int i = 0; i < buffers.ShapePoints.size(); i ++ )
@@ -61,10 +78,11 @@ class DCanvas
 }
 
 
-
+*/
 
 void Press()
  {
+   /*
   float x = (50 *  (mouseX  / 50 )) -300 ;
   float y = (50 *  (mouseY  / 50 )) -210;
   if(x >=0){
@@ -72,18 +90,66 @@ void Press()
   int time = (Math.round(map)); // añadir time al Json de Dcanvas a ShapeCreator
   float TR = Time + time*1000;
   stime = time;
-  
- 
-   
+
   buffers.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
   
+  
   }
- }
+*/
+
   
+  if(isDelete == false)
+  {
+  float x = (50 *  (mouseX  / 50 )) -300 ;
+  float y = (50 *  (mouseY  / 50 )) -210;
+  if(x >=0){
+  float map = map(x, 0, buffer.width, 0, 14);
+  int time = (Math.round(map)); // añadir time al Json de Dcanvas a ShapeCreator
+  float TR = Time + time*1000;
+  stime = time;
+
+  buffers.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
   
+     }
   
-  
+  }
+  else if(isDelete == true)
+  {
     
+     float x = (50 *  (mouseX  / 50 )) -300 ;
+     float y = (50 *  (mouseY  / 50 )) -210;
+     if(x >=0){
+     float map = map(x, 0, buffer.width, 0, 14);
+     int time = (Math.round(map)); // añadir time al Json de Dcanvas a ShapeCreator
+     float TR = Time + time*1000;
+     stime = time;
+
+     //buffers.ShapePoints.add(new ShapeCreator(x,y,Shape,Size,dcolor,TR));
+     
+      for (int i = 0; i < buffers.ShapePoints.size(); i ++ )
+     {
+      float[] dato = buffers.ShapePoints.get(i).getData();
+       if(dato[0] == x && dato[1] == y)
+       {
+         buffers.ShapePoints.remove(i);
+       }
+      
+      }
+     
+     }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ }
+
     
     void update()
     {
@@ -107,8 +173,38 @@ void Press()
   
   
   
+  void test() ////////// mejorar es solo un test//////////////////////////
+  {
+    
+   
+ // float pos = map(player.position(), 0, player.length(), 0, buffer.width);
+  
+   
+
+      
+  for (int i = 0; i < buffers.ShapePoints.size(); i ++ )
+  {
+   // buffers.ShapePoints.get(i).moveShape();
+   
+      float nextPos = Time + Range;
+                float[] data = new float[7];
+                data = buffers.ShapePoints.get(i).getData();
+                 lastPos = data[7];
+                 if(lastPos >= Time && lastPos <= nextPos && data[7]<player.position())
+                  {
+                
+                   buffers.ShapePoints.get(i).moveShape();
+                  }
+                 
+                  
+                  
+                 }
+    
+  }
+  
+    
+    
+  }
   
   
   
-  
-}

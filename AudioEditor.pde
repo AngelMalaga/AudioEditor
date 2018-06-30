@@ -21,13 +21,15 @@ PVector dcolor = new PVector(0,0,0);
 //PGraphics buffer;
 int messageBoxResult= -1;////////////////
 String messageBoxString = "";///////////////
-
 int rango,vrango,stime;
 String Path;
+  boolean isDelete = false;
 public enum Hstate {
-  save,
-  draw,
   load,
+  draw,
+  loop,
+  save,
+  play,
   none
   
 }
@@ -65,16 +67,29 @@ void setup()
   .setSize(100,35)
   .setLabel("Cuadrado");
   
+  
+  ui.addButton("Looping")
+  .setPosition(40,380)
+  .setSize(100,35)
+  .setLabel("Loop");
+  
+   ui.addButton("StopLooping")
+  .setPosition(150,380)
+  .setSize(100,35)
+  .setLabel("StopLoop");
+
+  
     ui.addButton("ChargeShapeCi")
   .setPosition(150,330)
   .setSize(100,35)
   .setLabel("Circulo");
   
+  /*
     ui.addButton("DeleteShape")
   .setPosition(40,550)
   .setSize(100,35)
   .setLabel("Eliminar Figura");
- 
+ */
    ui.addSlider("R", 0, 255, 0, 40, 436, 210, 25);//  Colores RGB
    ui.addSlider("G", 0, 255, 0, 40, 466, 210, 25);//  Colores RGB
    ui.addSlider("B", 0, 255, 0, 40, 496, 210, 25);//  Colores RGB
@@ -113,7 +128,7 @@ void drawUi()
    
    
    Dcanvas = new DCanvas();
-    Vcanvas = new VCanvas();
+   Vcanvas = new VCanvas();
    
 
     int m = millis();
@@ -144,9 +159,17 @@ void charge()
 
 void updateUi()
 {
-  if(player != null){ 
+  if(player != null && state == state.draw){ 
    
   ui.getController("Time").setMax(player.length()-Range);
+  }
+  if(state == state.loop)
+  {
+  
+     ui.getController("Time").lock();
+    
+  }else{
+     ui.getController("Time").unlock();  
   }
 }
 
@@ -176,15 +199,51 @@ void ChargeShapeCi()
 }
 
 
-void DeleteShape()
+void Looping()
 {
-     
+    if(state == state.draw)
+    {
+   state = state.loop;
+     }
+    if(state == state.loop)
+  {
+     player.play();
+  int tm = Math.round(Time);  
+  int ltm = Math.round(Time+ Range);
+//  if ( mouseButton == RIGHT )
+//  {
     
-
-   
+    player.setLoopPoints(tm, ltm);
+    //loopEnd = ms;
+    print(tm);
+     player.loop(9999); 
+    
+ // }
+  }
   
 }
 
+void StopLooping()
+{
+     if(state == state.loop)
+  {
+    player.loop(0);
+    player.pause();
+    state = state.draw;
+  }
+}
+   
+  
+/*
+void DeleteShape()
+{
+     
+
+// nada por aca
+   
+  
+}
+*/
 
 void draw()
 {
@@ -192,12 +251,17 @@ void draw()
   background(#BF4545);
  
      
-  if(state == state.draw){
+  if(state == state.draw || state == state.loop ){
   Dcanvas.draw();
   Vcanvas.draw();
   updateUi();
   }
-  
+  /*
+  if(state == state.loop)
+  {
+    Dcanvas.test();
+  }
+  */
 }
 
 
@@ -217,6 +281,8 @@ void keyPressed()
  }else
  {
   player.play(); 
+  
+ 
  }
 
 }
@@ -226,12 +292,35 @@ void keyPressed()
 void mouseClicked()
 {
   if(state == state.draw){
+  if ( mouseButton == RIGHT )
+  {
+    isDelete = true;
+     
    Dcanvas.Press();
    dcolor.set(R,G,B);
     updateUi();
+     
+  }
+  else
+  {
+    isDelete = false;
+    
+   Dcanvas.Press();
+   dcolor.set(R,G,B);
+    updateUi();
+  
+  
   }
   
+  
+  }
+  
+ 
+  
 }
+
+ 
+
 
 
 

@@ -1,7 +1,8 @@
 class ShapeCreator
 {
-   float py,px,size,R,G,B,rt;
+   float py,px,size,R,G,B,rt,x = 0;
    int type,vtime;
+   boolean isRange = true;
    PVector rcolor ;
 
    ShapeCreator(float px,float py,int type,float size,PVector rcolor,float rt )
@@ -61,13 +62,72 @@ class ShapeCreator
 
   
  }
+ 
+ 
+ void moveShape()/////////////////////solucionar esto
+ {
+   /*
+    
+       int ltm = int(Time + Range*10000);
+    
+      float xm1 = map( player.position(), 0, player.length(), 0, ltm);
+      */
+        float xm = map( x, 0, Dcanvas.buffer.width, 0, Range );
+      int tm = Math.round(xm); 
+    
+      if(tm<=Dcanvas.buffer.width && isRange == true)
+      {
+     
+       x = x +0.4;
+      }
+      else{
+       isRange = false;
+        
+        //x = 0;
+      
+      }
+      
+    // print(", Xml: ,"+ xm1+", ltm: ,"+ ltm);
+   /*
+      if(xm1 >= ltm )
+      {
+       tm = 0;
+       x = 0;
+       print("Cero");
+       isRange = true;     
+      }
+      */
+  
+  
+  
+   
+    if(type == 1)
+   {
+    
+    Dcanvas.buffer.beginDraw();
+     Dcanvas.buffer.fill(R,G,B);
+     Dcanvas.buffer.rectMode(CENTER);
+     Dcanvas.buffer.rect(tm,py+25,size*2,size*2); 
+     Dcanvas.buffer.endDraw();
+
+   }
+   else
+   {
+     
+      Dcanvas.buffer.beginDraw();
+      Dcanvas.buffer.fill(R,G,B);
+      Dcanvas.buffer.ellipse(tm,py+25,size*2,size*2); 
+      Dcanvas.buffer.endDraw();
+   }
+   
+ }
 /// Editar/////////////////////////////////////////////////////  NO  esta bien, hay que mejorar esta parte
 /*
 -Falta implementar  el boton de eliminar
--Falta corregir el cuadro de edicion 
+
 
 intenta hacer lo del boton elimnar
-yo me pondre a hacer lo de VCanvas.
+
 
 
 */

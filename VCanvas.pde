@@ -3,6 +3,8 @@ class VCanvas
   // Este es el canvas  de la ventana superior de edicion
   PGraphics buffer;
   color c = color(255,255,255);
+  int loopBegin;
+int loopEnd;
   
   public VCanvas()
   {
@@ -27,7 +29,9 @@ class VCanvas
   
    lineOne = map(Time, 0, player.length(), 0, buffer.width);
    lineTwo = map(Time+Range, 0, player.length(), 0, buffer.width);
-
+   
+  float lbx = map(loopBegin, 0, player.length(), 0, width);
+  float lex = map(loopEnd, 0, player.length(), 0, width);
    
 
   
@@ -107,5 +111,25 @@ class VCanvas
  
     float lastPos = 0;
     
+    /*
+    
+  void mousePressed()
+{
+  int ms = (int)map(mouseX, 0, width, 0, player.length());
+  int tm = Math.round(Time);  
+  int ltm = Math.round(Time+ Range);
+  if ( mouseButton == RIGHT )
+  {
+    player.setLoopPoints(tm, ltm);
+    //loopEnd = ms;
+    print(tm);
+  }
  
+}
+    
+    void keyPressed()
+    {
+      player.loop(2);
+    }
+ */
 }
