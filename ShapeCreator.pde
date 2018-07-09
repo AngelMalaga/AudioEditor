@@ -64,14 +64,9 @@ class ShapeCreator
  }
  
  
- void moveShape()/////////////////////solucionar esto
+ void moveShape()
  {
-   /*
-    
-       int ltm = int(Time + Range*10000);
-    
-      float xm1 = map( player.position(), 0, player.length(), 0, ltm);
-      */
+
         float xm = map( x, 0, Dcanvas.buffer.width, 0, Range );
       int tm = Math.round(xm); 
     
@@ -83,20 +78,9 @@ class ShapeCreator
       else{
        isRange = false;
         
-        //x = 0;
-      
+       
       }
-      
-    // print(", Xml: ,"+ xm1+", ltm: ,"+ ltm);
-   /*
-      if(xm1 >= ltm )
-      {
-       tm = 0;
-       x = 0;
-       print("Cero");
-       isRange = true;     
-      }
-      */
+
   
   
   
@@ -121,16 +105,6 @@ class ShapeCreator
    }
    
  }
-/// Editar/////////////////////////////////////////////////////  NO  esta bien, hay que mejorar esta parte
-/*
--Falta implementar  el boton de eliminar
-
-
-intenta hacer lo del boton elimnar
-
-
-
-*/
 
  void vdrawShape()
  {

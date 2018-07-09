@@ -1,0 +1,47 @@
+{
+  "Background": [{
+    "R": 255,
+    "B": 255,
+    "G": 255
+  }],
+  "SongName": "C:\\Users\\angel\\Desktop\\FinalHerramientas\\AudioEditor\\data\\Eury.mp3",
+  "Level": [
+    {
+      "Shape": 2,
+      "Position": 40,
+      "Size": 10,
+      "Color": [{
+        "R": 0,
+        "B": 0,
+        "G": 0
+      }],
+      "x": 100,
+      "Time": 2000
+    },
+    {
+      "Shape": 2,
+      "Position": 240,
+      "Size": 24.761905670166016,
+      "Color": [{
+        "R": 119.00000762939453,
+        "B": 171.21429443359375,
+        "G": 221
+      }],
+      "x": 150,
+      "Time": 3000
+    },
+    {
+      "Shape": 1,
+      "Position": 140,
+      "Size": 24.761905670166016,
+      "Color": [{
+        "R": 119.00000762939453,
+        "B": 171.21429443359375,
+        "G": 221
+      }],
+      "x": 200,
+      "Time": 4000
+    }
+  ],
+  "Lenght": 60
+}

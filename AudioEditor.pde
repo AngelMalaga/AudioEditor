@@ -7,9 +7,10 @@ DCanvas Dcanvas;
 VCanvas Vcanvas;
 LoadFile file;
 Data  data;
-Buffer buffers;
+Shapes shapes;
 ControlGroup messageBox; ////////
 ControlGroup messageBox2;///////
+ControlGroup messageBox3;
 AudioMetaData meta;
 
 //String name  = "Viva la vida";
@@ -25,7 +26,7 @@ int rango,vrango,stime;
 String Path;
   boolean isDelete = false;
 public enum Hstate {
-  load,
+  stop,
   draw,
   loop,
   save,
@@ -42,7 +43,7 @@ void setup()
  
   
   data = new Data();
-  buffers = new Buffer();
+  shapes = new Shapes();
 
   
   
@@ -100,8 +101,8 @@ void setup()
 
    
    
-  ui.addSlider("Size", 10, 35, 20, 40, 295, 210, 25);
-  ui.addSlider("Range", 1, 14000, 1, 40, 260, 210, 25);
+  ui.addSlider("Size", 10, 25, 20, 40, 295, 210, 25);
+  ui.addSlider("Range", 1, 13000, 1, 40, 260, 210, 25);
    
    ui.getController("Size").setValue(Size);
    ui.getController("Time").setValue(Time);
@@ -113,49 +114,56 @@ void setup()
    ui.getController("B").setValue(B);
    
   //       textos de ayuda
-    Button b = ui.addButton("toggleBox",1,700,10,100,30);
-    b.setLabel("Ayuda");
+    ui.addButton("Ayudar")
+    .setPosition(700,10)
+    .setSize(100,35)
+    .setLabel("Help");
     
-  // control p5 es el problema
+  
  
 }
 
 void drawUi()
 {
  
-  /*
-    Problemas con controlP5
-      aca tendria que ser el dibujado de los controles
-   */
+//  createMessageBox(); Da horror
    
    
    Dcanvas = new DCanvas();
    Vcanvas = new VCanvas();
    
 
-    int m = millis();
-    if(m > 2000)
-     {
-     charge();
-     }
+     if(player != null){ 
+ 
+    
+     state = state.draw;
+     
+      if(player.length() < 15000)
+    {
+      player.close();
+      state = state.stop;
+
+
+     
+    }
+     
+     
+     
+     
+     
+     
+  }
     
    
  }
 
 
-void charge()
-{
-  if(player != null){ 
- 
-    
-     state = state.draw;
-  }
-}
 
 
 
 void updateUi()
 {
+
   if(player != null && state == state.draw){ 
    
   ui.getController("Time").setMax(player.length()-Range);
@@ -164,9 +172,11 @@ void updateUi()
   {
   
      ui.getController("Time").lock();
+     ui.getController("Range").lock();
     
   }else{
      ui.getController("Time").unlock();  
+     ui.getController("Range").unlock();  
   }
 }
 
@@ -225,47 +235,28 @@ void StopLooping()
      if(state == state.loop)
   {
     player.loop(0);
-    player.pause();
+    
+    player.rewind();
+    player.pause(); 
     state = state.draw;
   }
 }
    
-  
-/*
-void DeleteShape()
-{
-     
 
-// nada por aca
-   
-  
-}
-*/
 
 void draw()
 {
    
-  background(#BF4545);
+  background(#B44C43);
  
      
-  if(state == state.draw || state == state.loop ){
+  if(state == state.draw || state == state.loop  || state == state.stop){
   Dcanvas.draw();
   Vcanvas.draw();
   updateUi();
   }
-  /*
-  if(state == state.loop)
-  {
-    Dcanvas.test();
-  }
-  */
+
 }
-
-
-
-
-
-
 
 
 
@@ -288,7 +279,7 @@ void keyPressed()
 
 void mouseClicked()
 {
-  if(state == state.draw){
+  if(state == state.draw && state != state.none ){
   if ( mouseButton == RIGHT )
   {
     isDelete = true;
@@ -328,18 +319,21 @@ void fileSelected(File selection) {
   } 
   else 
   {
+       shapes.ShapePoints.clear();
     if(player != null)
     {
       state = state.none;
       player.close();
-      
+        
     }
    
-   
+    
     Path = selection.getAbsolutePath();
     file = new LoadFile();
     file.load();
+    
     drawUi();
+    
     
   }
 }
@@ -366,8 +360,25 @@ void fileSong(File selection) {
   else 
   {
     
+    if( player != null){
+       player.close();
+  
+       shapes.ShapePoints.clear();
+    }
+  
+  //  background(c);
     Path = selection.getAbsolutePath();
     player = minim.loadFile(Path,512); 
+    
+  
+    if(player.length() < 15000)
+    {
+      print("No aceptado");
+   
+      player.close();
+      drawUi();
+     
+    }
    
     data.fileSong(Path);
     
@@ -377,10 +388,10 @@ void fileSong(File selection) {
   }
 }
 
-///////// El boton de ayuda da error  
-/*
+
 
 void toggleBox(int theValue){
+ println("ayuda para el usuario" + theValue);
   if(messageBox.isVisible()) {
     messageBox.hide();
     messageBox2.hide();
@@ -392,25 +403,83 @@ void toggleBox(int theValue){
   
 }
 
-
+/*
 
 void createMessageBox(){
-    messageBox = ui.addGroup("Ayuda",20,215,250);
+    messageBox = ui.addGroup("Help",20,215,250);
  messageBox.setBackgroundHeight(330);
  messageBox.setBackgroundColor(color(0,100));
  messageBox.hide();
   
-  // add a TextLabel to the messageBox.
-  Textlabel l = ui.addTextlabel("messageBoxLabel","Este slash te permite determinar el tipo de la cancion",2,10);
-  l.moveTo(messageBox);
+  // add a TextLabel to the messageBox
+  ui.addTextlabel("messageBoxLabel","Te permite determinar el tiempo de la ",1,10)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+   ui.addTextlabel("messageBoxLabelw","cancion que quieres trabajar",1,25)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
  
- messageBox2 = ui.addGroup("Ayuda2",300,215,300);
+ ui.addTextlabel("messageBoxLabelwe","Determina el area del tiempo que eligistes",1,40)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+   ui.addTextlabel("messageBoxLabelwer","y cuantos cuadrados debe aver en la cuadrilla",1,55)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+  ui.addTextlabel("messageBoxLabelhe","Determinas del tamaño del objeto",1,85)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+  ui.addTextlabel("messageBoxLabelq","Estos dos botones crean los circulos" ,1,110)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+  ui.addTextlabel("messageBoxLabelz","y cuadrados en la cuadrilla",1,125)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+  ui.addTextlabel("messageBoxLabelwegt","Estos botones  comiensan y paran la",1,165)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+  ui.addTextlabel("messageBoxLabelhy","canción segun el RANGE y el TIME",1,180)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+  
+  ui.addTextlabel("messageBoxLabeljk","Determinan el color del objeto",1,210)
+  .setFont(createFont("Georgia", 10))
+  .setColorValue(#EDFF21)
+  .moveTo(messageBox);
+ 
+ messageBox2 = ui.addGroup("Help2",300,215,300);
  messageBox2.setBackgroundHeight(100);
  messageBox2.setBackgroundColor(color(0,100));
  messageBox2.hide();
   
   // add a TextLabel to the messageBox.
-  Textlabel j = ui.addTextlabel("messageBoxLabel2","Aqui puedes poner los cuadrado y circulos ",20,20);
-  j.moveTo(messageBox2);
+   ui.addTextlabel("messageBoxLabel2","Aqui puedes poner los cuadrado y circulos ",20,20)
+  .setFont(createFont("Georgia", 10))
+  .moveTo(messageBox2);
+  
+  messageBox3 = ui.addGroup("Help3",50,50,400);
+ messageBox3.setBackgroundHeight(100);
+ messageBox3.setBackgroundColor(color(0,100));
+ messageBox3.hide();
+  
+  // add a TextLabel to the messageBox.
+  ui.addTextlabel("messageBoxLabel3","Aqui se mostraran los cuadrado y circulos que creastes en la cuadrilla ",20,20)
+  .setFont(createFont("Georgia", 10))
+  .moveTo(messageBox3);
 }
-*/
+  */

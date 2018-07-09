@@ -22,17 +22,16 @@ String Nombre;
   }
 
 void savedata(int time)
-{print("data 4 :::::",buffers.ShapePoints.size());
+{print("data 4 :::::",shapes.ShapePoints.size());
 
-  if(buffers.ShapePoints.size()> 0 && player != null)
+  if(shapes.ShapePoints.size()> 0 && player != null)
   {
-    for(int i = 0; i < buffers.ShapePoints.size(); i++)
+    for(int i = 0; i < shapes.ShapePoints.size(); i++)
   {
      temp();
     float[] data = new float[7];
-    data = buffers.ShapePoints.get(i).getData();
-  // print("data 4 :::::",ShapePoints.size());
-   
+    data = shapes.ShapePoints.get(i).getData();
+
    
     json.setString("SongName",Nombre);
     json.setInt("Lenght",time);

@@ -10,13 +10,13 @@ JSONObject json;
   
   void load()
   {
-     String SongName = json.getString("SongName"); // Esto contiene la ruta del archivo y el nombre
-     int Lenght = json.getInt("Lenght"); /// Falta  
+     String SongName = json.getString("SongName"); 
+     int Lenght = json.getInt("Lenght"); 
      
      JSONArray Background = json.getJSONArray("Background");
      JSONArray Level = json.getJSONArray("Level");
      Path = SongName;
-     player = minim.loadFile(Path,512);// redundante
+     player = minim.loadFile(Path,512);
      data.fileSong(SongName);
     
 
@@ -58,7 +58,7 @@ JSONObject json;
           dcolor.set(R,G,B);
        
      }
-        buffers.ShapePoints.add(new ShapeCreator(lx,ly,Shape,Size,dcolor,x1));
+        shapes.ShapePoints.add(new ShapeCreator(lx,ly,Shape,Size,dcolor,x1));
 
      }
      
